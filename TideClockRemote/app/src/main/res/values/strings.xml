@@ -2,4 +2,9 @@
     <string name="app_name">Tide Clock Remote</string>
     <string name="action_settings">Settings</string>
     <string name="action_refresh">Refresh</string>
+    <string name="msg_connected_wifi">Connected to Tide Clock for setup</string>
+    <string name="msg_failed_wifi">Failed to connect to Tide Clock for setup</string>
+    <string name="msg_failed_socket">Failed to open a socket to setup server</string>
+    <string name="msg_connecting_wifi">Connecting to Tide Clock...</string>
+    <string name="msg_send_failed">Failed to send info to Tide Clock</string>
 </resources>
