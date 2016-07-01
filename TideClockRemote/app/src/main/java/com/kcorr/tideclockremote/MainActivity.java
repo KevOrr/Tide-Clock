@@ -8,6 +8,7 @@ import android.location.LocationManager;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -229,7 +230,10 @@ public class MainActivity extends AppCompatActivity {
     private void sendInfo() {
         try {
             OutputStream os = socket.getOutputStream();
-            os.write(info.getBytes(StandardCharsets.US_ASCII));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+                os.write(info.getBytes(StandardCharsets.US_ASCII));
+            else
+                os.write(info.getBytes(Charset.forName("US-ASCII")));
             os.flush();
         } catch (IOException e) {
             String msg = getString(R.string.msg_send_failed);
