@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         // Display closest station data in TextView
         if (station != null) {
             ((TextView) findViewById(R.id.textView_output)).setText(
-                    String.format("Name: %s\nID: %d\nLocation: %f, %f", station.name,
+                    String.format(getString(R.string.info_station), station.name,
                             station.id, station.latitude, station.longitude)
             );
             info = "ID " + station.id;
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         // Connect to setup AP, and display success message, or failure after CONNECT_TIMEOUT ms (5 secs)
         wifiManager.reconnect();
 
-        final AsyncTask connectSocketTask = new AsyncTask<Void, Void, Boolean>() {
+        final AsyncTask<Void, Void, Boolean> connectSocketTask = new AsyncTask<Void, Void, Boolean>() {
             @Override
             protected Boolean doInBackground(Void... _) {
                 try {
