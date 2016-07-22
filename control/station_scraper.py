@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import sys
 import json
 from bs4 import BeautifulSoup as BS
 import requests
@@ -13,9 +14,9 @@ soup = BS(requests.get(URL_SCRAPE).text, 'lxml')
 stations = [int(station.attrs['id'].strip('a')) for station in soup.find_all(class_='station')]
 print('Found %d stations' % len(stations))
 
-good_stations = []
+good_stations = {}
 
-for station in stations:
+for i, station in enumerate(stations):
     print(station, end=': ')
     station_data = requests.get(URL_API, params = {
         'station': station,
@@ -29,18 +30,19 @@ for station in stations:
     }).json()
 
     if 'error' in station_data:
-        print('Bad')
+        print('Bad' + ' '*14)
 
     elif 'metadata' in station_data and 'data' in station_data:
-        print('Good')
-        station_data['metadata']['id'] = int(station_data['metadata']['id'])
+        print('Good' + ' '*13)
         station_data['metadata']['lat'] = float(station_data['metadata']['lat'])
         station_data['metadata']['lon'] = float(station_data['metadata']['lon'])
-        good_stations.append(station_data['metadata'])
-    
+        good_stations[station_data['metadata']['id']] = station_data['metadata']
+
     else:
         e = ValueError('Malformed response for station id %s' % station)
         raise e
+
+    sys.stdout.write('{}/{} ({:.1%})\r'.format(i, len(stations), i/len(stations)))
 
 with open(OUT_FILE, 'w') as f:
     json.dump(good_stations, f)

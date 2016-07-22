@@ -15,22 +15,35 @@ def get_angle(lat1, lon1, lat2, lon2):
     #dlon = lon1 - lon2
     #return 2*asin(sqrt(sin(dlat/2)**2 + cos(lat1)*cos(lat2)*sin(dlon/2)**2))
 
-try:
-    lat = radians(float(sys.argv[1]))
-    lon = radians(float(sys.argv[2]))
-except (IndexError, ValueError):
-    print(USAGE)
-    sys.exit(1)
+# All angles in degrees
+def get_closest_station(lat, lon):
+    lat = radians(lat)
+    lon = radians(lon)
 
-with open(IN_FILE) as f:
-    stations = json.load(f)
+    with open(IN_FILE) as f:
+        stations = json.load(f)
 
-min_angle = 2*pi
-for station, meta in stations.items():
-    angle = get_angle(lat, lon, radians(float(meta['lat'])), radians(float(meta['lon'])))
-    if angle <= min_angle:
-        min_angle = angle
-        closest_station = station
+    min_angle = 2*pi
+    for station, meta in stations.items():
+        angle = get_angle(lat, lon, radians(float(meta['lat'])), radians(float(meta['lon'])))
+        if angle <= min_angle:
+            min_angle = angle
+            closest_station = station
 
-print('{}: {}'.format(closest_station, stations[closest_station]['name']))
-print('{}, {}'.format(stations[closest_station]['lat'], stations[closest_station]['lon']))
+    return closest_station
+
+if __name__ == '__main__':
+    try:
+        lat = float(sys.argv[1])
+        lon = float(sys.argv[2])
+    except (IndexError, ValueError):
+        print(USAGE)
+        sys.exit(1)
+
+    with open(IN_FILE) as f:
+        stations = json.load(f)
+
+    closest_station = get_closest_station(lat, lon)
+
+    print('{}: {}'.format(closest_station, stations[closest_station]['name']))
+    print('{}, {}'.format(stations[closest_station]['lat'], stations[closest_station]['lon']))

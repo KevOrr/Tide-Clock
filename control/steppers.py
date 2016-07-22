@@ -62,7 +62,7 @@ class Stepper():
             gpio.output(self._pins, (0, 0, 0, 0))
 
     def step(self):
-        if speed == 0 || self._target == self._position || not self._powered:
+        if speed == 0 or self._target == self._position or not self._powered:
             return
 
         if self._target < self._position:
@@ -71,4 +71,3 @@ class Stepper():
             self._step = (self._step + 1) % len(self._steps)
 
         gpio.output(self._pins, self._steps[self._step])
-
