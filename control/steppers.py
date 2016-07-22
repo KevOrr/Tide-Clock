@@ -46,7 +46,7 @@ class Stepper():
         return self._target
 
     def set_speed(self, speed):
-        if velocity < 0:
+        if speed < 0:
             e = ValueError('speed must be non-negative')
             raise e
         self._speed = speed
@@ -62,12 +62,14 @@ class Stepper():
             gpio.output(self._pins, (0, 0, 0, 0))
 
     def step(self):
-        if speed == 0 or self._target == self._position or not self._powered:
+        if self._speed == 0 or self._target == self._position or not self._powered:
             return
 
         if self._target < self._position:
             self._step = (self._step - 1) % len(self._steps)
+            self._position -= 1
         else:
             self._step = (self._step + 1) % len(self._steps)
+            self._position += 1
 
         gpio.output(self._pins, self._steps[self._step])
