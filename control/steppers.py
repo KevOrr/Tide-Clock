@@ -29,7 +29,7 @@ class Stepper():
             e = ValueError('mode must be \'half\' or \'full\'')
             raise e
         self._mode = mode
-        self._steps = _HALF_STEPS if mode == MODE_HALF else _FULL_STEPS
+        self._steps = self._HALF_STEPS if mode == 'half' else self._FULL_STEPS
 
         self._step = 0
         this._position = 0
