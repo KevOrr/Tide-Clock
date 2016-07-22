@@ -32,7 +32,7 @@ class Stepper():
         self._steps = self._HALF_STEPS if mode == 'half' else self._FULL_STEPS
 
         self._step = 0
-        this._position = 0
+        self._position = 0
         self._target = 0
         self._speed = 0
         self._powered = True
@@ -52,7 +52,7 @@ class Stepper():
         self._speed = speed
 
     def get_position(self):
-        return this._position
+        return self._position
 
     def set_stepper_power(self, powered=True):
         self._powered = powered
