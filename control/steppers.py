@@ -47,8 +47,7 @@ class Stepper():
         self._position = 0
         self._target = 0
         self._speed = 0
-        self._time_since_last_step = 0
-        self._powered = True
+        self.power = True # calls _powered setter
         self._thread = None
 
     def move(self, target):
@@ -94,10 +93,12 @@ class Stepper():
         self._position = val
         self._target = val
 
-    def is_on(self):
+    @property
+    def power(self):
         return self._powered
 
-    def set_power(self, powered):
+    @power.setter
+    def power(self, powered):
         self._powered = powered
         if powered:
             gpio.output(self._pins, self._steps[self._step])
