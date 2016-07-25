@@ -16,15 +16,15 @@ else:
 
 class Stepper():
     _HALF_STEPS = ((1, 0, 0, 0),
-                   (1, 1, 0, 0),
-                   (0, 1, 0, 0),
+                   (1, 0, 1, 0),
+                   (0, 0, 1, 0),
                    (0, 1, 1, 0),
-                   (0, 0 ,1, 0),
-                   (0, 0, 1, 1),
+                   (0, 1 ,0, 0),
+                   (0, 1, 0, 1),
                    (0, 0, 0, 1),
                    (1, 0, 0, 1))
 
-    _FULL_STEPS = _HALF_STEPS[::2]
+    _FULL_STEPS = _HALF_STEPS[1::2]
 
     def __init__(self, pins, mode='half'):
         gpio.setmode(gpio.BOARD) # use board pin numbers instead of CPU channel numbers
@@ -49,7 +49,6 @@ class Stepper():
         self._speed = 0
         self._time_since_last_step = 0
         self._powered = True
-        self._running = False
         self._thread = None
 
     def move(self, target):
@@ -93,6 +92,7 @@ class Stepper():
     @position.setter
     def position(self, val):
         self._position = val
+        self._target = val
 
     def is_on(self):
         return self._powered
