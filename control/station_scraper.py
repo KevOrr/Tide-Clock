@@ -5,9 +5,11 @@ import json
 from bs4 import BeautifulSoup as BS
 import requests
 
+from control.util import get_abs_path
+
 URL_SCRAPE = 'https://tidesandcurrents.noaa.gov/stations.html?type=All%20Stations&sort=0'
 URL_API = 'http://tidesandcurrents.noaa.gov/api/datagetter'
-OUT_FILE = 'stations.json'
+OUT_FILE = get_abs_path('stations.json')
 
 print('Getting station ids...')
 soup = BS(requests.get(URL_SCRAPE).text, 'lxml')

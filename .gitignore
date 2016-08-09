@@ -5,3 +5,5 @@ venv/
 # Vim
 *.swp
 
+control/log
+control/config.py

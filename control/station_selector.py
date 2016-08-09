@@ -4,8 +4,10 @@ import sys
 from math import sin, cos, acos, radians, sqrt, pi
 import json
 
+from control.util import get_abs_path
+
 USAGE = '%s lat lon' % sys.argv[0]
-IN_FILE = 'stations.json'
+IN_FILE = get_abs_path('stations.json')
 
 # https://en.wikipedia.org/wiki/Great-circle_distance#Formulas
 # All angles in radians
