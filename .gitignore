@@ -1,9 +1,15 @@
 # Python
 venv/
 *.pyc
+*.pyo
+__pycache__
 
 # Vim
 *.swp
 
-control/log
-control/config.py
+# Gedit
+*~
+
+# Open Office
+.~lock*
+
