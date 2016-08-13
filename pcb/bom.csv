@@ -1,0 +1,7 @@
+"Id";"Designator";"Package";"Quantity";"Designation";"Supplier and ref";
+1;"P1";"Socket_Strip_Straight_2x20";1;"Raspberry_Pi_GPIO_Header";;;
+2;"IC1,IC2";"DIP-16_W7.62mm";2;"SN754410";;;
+3;"RP1,RP2";"R_Array_Convex_4x1206";2;"10k";;;
+4;"M2,M1";"Pin_Header_Angled_1x04";2;"11HS12-0674S";;;
+5;"R1";"R_1206_HandSoldering";1;"10k";;;
+6;"P2";"Pin_Header_Angled_1x02";1;"CONN_01X02";;;
